@@ -52,7 +52,7 @@ Non-goals:
 - **created_at** (datetime)
 - **updated_at** (datetime)
 
-#### `score_events` (anti-replay ledger)
+### `score_events` (anti-replay ledger)
 
 Tracks action completions to ensure idempotency and auditing.
 
@@ -60,7 +60,7 @@ Tracks action completions to ensure idempotency and auditing.
 - `user_id` (UUID, FK)
 - `delta` (int) — how much score increased (typically +1 or server-defined)
 - `source` (string) — e.g., `web`, `mobile`
-- `created_at`
+- `created_at` (datetime)
 - `request_ip`, `user_agent` (optional for fraud analysis)
 
 ---
@@ -159,7 +159,7 @@ Responses:
 
 ## Live Updates (Realtime)
 
-Support either:
+Using WebSocket.
 
 ### Web Socket
 
@@ -305,7 +305,7 @@ Recommended approach:
 
 1. Execution Flow Diagram
 
-![Live score flow diagram](https://drive.google.com/file/d/1gFdCR7oMSDBqjPB1nHJiou2k7Lsu398j/view?usp=sharing)
+![Live score flow diagram](images/Live%20scoreboard-2026-flow-diagram-websocket.png)
 
 - Clients **connect once** via WebSocket
 - Frontend explicitly **subscribes** to `scoreboard.top10`
@@ -316,7 +316,7 @@ Recommended approach:
   - future extensions (chat, notifications, presence)
 
 2. Component Diagram
-   ![Component Diagram](https://drive.google.com/file/d/1Rdoj3kH-ok5Ll1YzUz62QxwpNijaMVt0/view?usp=sharing)
+   ![Component Diagram](<images/Component%20Diagram%20(API%20_%20WS%20_%20Redis%20_%20DB).png>)
 
 - Redis is used for caching the Top-10 leaderboard and rate limiting.
 
@@ -324,7 +324,7 @@ Recommended approach:
 
 3. Deployment Diagram
 
-![Deployment Diagram](https://drive.google.com/file/d/1YSeeXr0gMsWT_N2iyQ8oVdiVhD8VZdiF/view?usp=sharing)
+![Deployment Diagram](images/Deployment%20%20diagram-2026.png)
 
 - The load balancer must support WebSocket upgrade and ideally enable sticky sessions for WS (helpful but not strictly required if your WS layer is stateless).
 

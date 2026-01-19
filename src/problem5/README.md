@@ -32,40 +32,7 @@ This project implements **Problem 5: A Crude Server**.
 
 ## Project Structure
 
-# Crude Server – Express + TypeScript
-
-## Problem Statement
-
-This project implements **Problem 5: A Crude Server**.
-
-### Requirements
-
-- Backend server using **ExpressJS**
-- Written in **TypeScript**
-- Full **CRUD interface**:
-  - Create a resource
-  - List resources with basic filters
-  - Get resource details
-  - Update resource details
-  - Delete a resource
-- **Persistent storage** using a simple database
-- Simple **GUI** for interacting with the API
-- Include **tests** and documentation
-
----
-
-## Tech Stack
-
-- **Node.js + Express**
-- **TypeScript**
-- **SQLite (better-sqlite3)** for persistence
-- **Swagger (OpenAPI)** as API GUI
-- **Jest + Supertest** for integration testing
-
----
-
-## Project Structure
-
+```bash
 src/
 ├─ app.ts # Express app (testable)
 ├─ server.ts # Server entry point
@@ -75,6 +42,7 @@ src/
 │ └─ resources.ts # CRUD routes + Swagger JSDoc
 └─ tests/
 └─ resources.test.ts # Jest integration tests
+```
 
 ---
 
@@ -194,8 +162,6 @@ Tests use a separate SQLite test database and do not affect production data.
 - Defensive input validation
 
 - UUIDs used as stable identifiers
-
-##
 
 ## Future Improvements
 
