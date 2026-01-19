@@ -1,0 +1,23 @@
+body {
+  font-family: system-ui, Arial, sans-serif;
+  margin: 24px;
+}
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+input {
+  width: 220px;
+  padding: 8px;
+}
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+pre {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Problem 4 - Sum to N (TypeScript UI)</title>
+    <link rel="icon" type="image/x-icon" href="/images/icons8-rocket-100.png" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Sum from 1 to n</h1>
+
+    <div class="row">
+      <input id="nInput" type="number" value="5" step="1" />
+      <button id="calcBtn">Calculate</button>
+    </div>
+
+    <pre id="result"></pre>
+    <div class="source-code">
+      <h2>Source Code:</h2>
+      <pre><code>
+function checkIntegerInRange(n: number): void {
+  if (!Number.isFinite(n) || !Number.isInteger(n)) {
+    throw new TypeError("Input must be a finite integer number.");
+  }
+  if (Math.abs(n) > Number.MAX_SAFE_INTEGER) {
+    throw new RangeError(
+      `Input ${n} exceeds Number.MAX_SAFE_INTEGER (${Number.MAX_SAFE_INTEGER}).`
+    );
+  }
+}
+
+function sum_to_n_a(n: number): number {
+  // O(1) time, O(1) space
+  checkIntegerInRange(n);
+  return (n * (n + 1)) / 2;
+}
+
+function sum_to_n_b(n: number): number {
+  // O(n) time, O(1) space
+  checkIntegerInRange(n);
+  let sum = 0;
+  for (let i = 1; i <= n; i++) sum += i;
+  return sum;
+}
+
+function sum_to_n_c(n: number): number {
+  // O(n) time, O(log n) space (recursion depth)
+  checkIntegerInRange(n);
+
+  function rangeSum(lo: number, hi: number): number {
+    if (lo === hi) return lo;
+    if (hi - lo === 1) return lo + hi;
+    const mid = (lo + hi) >> 1;
+    return rangeSum(lo, mid) + rangeSum(mid + 1, hi);
+  }
+
+  return rangeSum(1, n);
+}
+    </code></pre>
+    </div>
+    <!-- compiled JS output -->
+    <script type="module" src="./dist/app.js"></script>
+  </body>
+</html>

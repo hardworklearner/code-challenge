@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+  <title>Problem 1</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./images/icons8-rocket-100.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script> 
+</head>
+<body>
+  <h1>Welcome to Problem 1</h1>
+  <p>This is a sample HTML file for Problem 1.</p>
+  <form id="sumForm">
+    <label for="input_n">Enter a positive integer:</label>
+    <input type="number" id="input_n" name="input_n" min="1" required>
+    <button type="submit">Calculate Sum</button>
+  </form>
+  <div id="result"></div>
+  <div class="source-code">
+    <h2>Source Code:</h2>
+    <pre><code>
+function checkIntegerInRange(n) {
+  if (!Number.isSafeInteger(n)) {
+    throw new RangeError(
+      `Value ${n} exceeds JavaScript safe integer limits (±${Number.MAX_SAFE_INTEGER}).`
+    );
+  }
+}
+
+var sum_to_n_a = function (n) {
+  checkIntegerInRange(n);
+  return (n * (n + 1)) / 2;
+};
+
+var sum_to_n_b = function (n) {
+  checkIntegerInRange(n);
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+    sum += i;
+  }
+
+  return sum;
+};
+
+function sum_to_n_c(n) {
+  checkIntegerInRange(n);
+
+  function helper(lo, hi) {
+    if (lo === hi) return lo;
+    if (hi - lo === 1) return lo + hi;
+
+    const mid = (lo + hi) >> 1;
+    return helper(lo, mid) + helper(mid + 1, hi);
+  }
+
+  return helper(1, n);
+}
+
+module.exports = { sum_to_n_a, sum_to_n_b, sum_to_n_c };
+
+    </code></pre>
+  </div>
+  <div class="footer">
+    <p>&copy; 2026 Code Challenge</p>
+  </div>
+  <script>
+    document.getElementById('sumForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const n = parseInt(document.getElementById('input_n').value, 10);
+      try {
+        const a = sum_to_n_a(n);
+        document.getElementById('result').textContent = `\nThe sum of integers from 1 to ${n} using method A is ${a}.\n`;
+        const b = sum_to_n_b(n);
+        document.getElementById('result').textContent += `\nThe sum of integers from 1 to ${n} using method B is ${b}.\n`;
+        const c = sum_to_n_c(n);
+        document.getElementById('result').textContent += `\nThe sum of integers from 1 to ${n} using method C is ${c}.\n`;
+       
+      } catch (error) {
+        document.getElementById('result').textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>
